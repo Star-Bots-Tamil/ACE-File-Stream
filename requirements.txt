@@ -3,6 +3,7 @@ tgcrypto<=1.2.3
 aiohttp
 python-dotenv<=0.20.0
 motor
+flask
 aiofiles
 dnspython
 apscheduler
