@@ -5,6 +5,8 @@ from Adarsh.bot import StreamBot
 from Adarsh.utils.database import Database
 from Adarsh.utils.human_readable import humanbytes
 from Adarsh.vars import Var
+from urllib.parse import quote_plus
+from Adarsh.utils import get_hash, get_name
 from pyrogram import filters, Client
 from pyrogram.errors import FloodWait, UserNotParticipant
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
@@ -63,11 +65,11 @@ async def private_receive_handler(c: Client, m: Message):
             return
     try:
         log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
-        stream_link = Var.URL + 'watch/' + str(log_msg.message_id)
+        stream_link = Var.URL + 'watch/' + {quote_plus(get_name(m))}
         shortlink = get_shortlink(stream_link) 
         if shortlink:
             stream_link = shortlink
-        online_link = Var.URL + 'download/'+ str(log_msg.message_id) 
+        online_link = Var.URL + 'download/'+ {quote_plus(get_name(m))} 
         shortlinka = get_shortlink(online_link)
         if shortlinka:
             online_link = shortlinka
